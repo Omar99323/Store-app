@@ -11,12 +11,13 @@ class CustomFormField extends StatelessWidget {
       required this.validator,
       this.onsubmit,
       this.ontap,
-      this.endIconOnPressed});
+      this.endIconOnPressed, required this.isPassword});
 
   final TextEditingController controler;
   final String label;
   final IconData starticon;
   final IconData? endicon;
+  final bool isPassword;
   final TextInputType type;
   final String? Function(String?)? validator;
   final void Function(String)? onsubmit;
@@ -29,6 +30,7 @@ class CustomFormField extends StatelessWidget {
       controller: controler,
       validator: validator,
       keyboardType: type,
+      obscureText: isPassword,
       onTap: ontap,
       onFieldSubmitted: onsubmit,
       decoration: InputDecoration(

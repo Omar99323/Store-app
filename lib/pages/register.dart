@@ -9,6 +9,8 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var cbt = BlocProvider.of<LogInCubit>(context);
+    // var loginFormkey = GlobalKey<FormState>();
     var emailcontrol = TextEditingController();
     var passwordcontrol = TextEditingController();
     return Scaffold(
@@ -45,7 +47,7 @@ class RegisterPage extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Please enter your email address';
                     }
-                  },
+                  }, isPassword: false,
                 ),
                 const SizedBox(
                   height: 15,
@@ -62,7 +64,7 @@ class RegisterPage extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Please enter your password';
                     }
-                  },
+                  }, isPassword: true,
                 ),
                 const SizedBox(
                   height: 25,

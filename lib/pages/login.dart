@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/cubits/login_cubit/login_cubit.dart';
 import 'package:store_app/cubits/login_cubit/login_state.dart';
 import 'package:store_app/helpers/consts.dart';
+import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register.dart';
 import 'package:store_app/widgets/custom_button.dart';
 import 'package:store_app/widgets/custom_form_field.dart';
@@ -13,14 +14,15 @@ class LogInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var loginFormkey = GlobalKey<FormState>();
     var emailcontrol = TextEditingController();
     var passwordcontrol = TextEditingController();
-    var loginFormkey = GlobalKey<FormState>();
     return BlocProvider(
       create: (context) => LogInCubit(),
       child: BlocConsumer<LogInCubit, LogInStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          var cbt = BlocProvider.of<LogInCubit>(context);
           return Scaffold(
             appBar: AppBar(),
             body: Center(
@@ -62,6 +64,7 @@ class LogInPage extends StatelessWidget {
                               return 'Please enter your email address';
                             }
                           },
+                          isPassword: false,
                         ),
                         const SizedBox(
                           height: 15,
@@ -69,8 +72,10 @@ class LogInPage extends StatelessWidget {
                         CustomFormField(
                           controler: passwordcontrol,
                           starticon: Icons.lock,
-                          endicon: Icons.visibility,
-                          endIconOnPressed: () {},
+                          endicon: cbt.visablity,
+                          endIconOnPressed: () {
+                            cbt.changePasswordVisability();
+                          },
                           label: 'Password',
                           type: TextInputType.visiblePassword,
                           // ignore: body_might_complete_normally_nullable
@@ -79,6 +84,7 @@ class LogInPage extends StatelessWidget {
                               return 'Please enter your password';
                             }
                           },
+                          isPassword: cbt.isPass,
                         ),
                         const SizedBox(
                           height: 25,
@@ -86,10 +92,13 @@ class LogInPage extends StatelessWidget {
                         CustomButton(
                           onpress: () {
                             if (loginFormkey.currentState!.validate()) {
-                              BlocProvider.of<LogInCubit>(context).userLogin(
+                              cbt.userLogin(
                                 email: emailcontrol.text,
                                 password: passwordcontrol.text,
                               );
+                            }
+                            if (state is LogInSuccessState) {
+                              Navigator.pushNamed(context, HomePage.id);
                             }
                           },
                           buttonchild: state is LogInLoadingState

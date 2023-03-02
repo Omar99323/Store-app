@@ -11,3 +11,5 @@ class LogInErrorState extends LogInStates {
 
   LogInErrorState(this.error);
 }
+
+class LogInPasswodState extends LogInStates {}
