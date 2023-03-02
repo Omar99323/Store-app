@@ -4,7 +4,8 @@ import 'package:store_app/helpers/consts.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.onpress, required this.text,
+    required this.onpress,
+    required this.text,
   });
 
   final void Function() onpress;
@@ -27,7 +28,6 @@ class CustomButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
               fontSize: 20,
               color: white,
             ),

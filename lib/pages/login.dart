@@ -28,7 +28,7 @@ class LogInPage extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold,),
                 ),
                 Text(
-                  'login now to browse our hot offers',
+                  'Login now to browse our hot offers',
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: Colors.grey,
                       ),
