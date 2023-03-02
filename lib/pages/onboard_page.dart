@@ -25,7 +25,7 @@ class OnBoardPage extends StatelessWidget {
           ),
           Text(
             model.title,
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.black),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(
             height: 10,

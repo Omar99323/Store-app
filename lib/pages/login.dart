@@ -5,6 +5,25 @@ class LogInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'LOGIN',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            Text(
+              'login now to browse our hot offers',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            
+          ],
+        ),
+      ),
+    );
   }
 }

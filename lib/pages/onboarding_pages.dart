@@ -36,10 +36,7 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: white,
         actions: [
           TextButton(
             onPressed: () {
