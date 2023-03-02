@@ -7,6 +7,7 @@ import 'package:store_app/pages/onboard_page.dart';
 
 class OnBoardingPages extends StatefulWidget {
   const OnBoardingPages({super.key});
+  static String id = 'OnBoardingPages';
 
   @override
   State<OnBoardingPages> createState() => _OnBoardingPagesState();
@@ -24,7 +25,7 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
     OnBoardModel(
       image: 'assets/images/husband_wife_shop.jpg',
       title: 'Family Needs',
-      body: 'Search for everything your family needs you will find it.',
+      body: 'Search for your family needs you will find it.',
     ),
     OnBoardModel(
       image: 'assets/images/shop_confuse.jpg',
@@ -40,15 +41,8 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const LogInPage();
-                  },
-                ),
-                (route) => false,
-              );
+              Navigator.pushNamedAndRemoveUntil(
+                  context, LogInPage.id, (route) => false);
             },
             child: const Text(
               'SKIP',
@@ -105,13 +99,9 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
                 FloatingActionButton(
                   onPressed: () {
                     if (lastpage) {
-                      Navigator.pushAndRemoveUntil(
+                      Navigator.pushNamedAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const LogInPage();
-                          },
-                        ),
+                        LogInPage.id,
                         (route) => false,
                       );
                     } else {

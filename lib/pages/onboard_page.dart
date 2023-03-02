@@ -6,6 +6,9 @@ class OnBoardPage extends StatelessWidget {
     super.key,
     required this.model,
   });
+
+  static String id = 'OnBoardPage' ;
+
   final OnBoardModel model;
 
   @override

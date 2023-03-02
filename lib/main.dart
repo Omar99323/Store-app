@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:store_app/helpers/consts.dart';
+import 'package:store_app/pages/home_page.dart';
+import 'package:store_app/pages/login.dart';
 import 'package:store_app/pages/onboarding_pages.dart';
+import 'package:store_app/pages/register.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,14 +16,19 @@ class ShopApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headlineMedium: TextStyle(
-            color: Colors.black,
+            color: maincolor,
           ),
-          headlineLarge: TextStyle(
+          headlineLarge: const TextStyle(
             color: Colors.black,
           ),
         ),
@@ -31,7 +40,13 @@ class ShopApp extends StatelessWidget {
         fontFamily: 'Poppins',
         primarySwatch: maincolor,
       ),
-      home: const OnBoardingPages(),
+      routes: {
+        OnBoardingPages.id: (context) => const OnBoardingPages(),
+        LogInPage.id: (context) => const LogInPage(),
+        RegisterPage.id: (context) => const RegisterPage(),
+        HomePage.id: (context) => const HomePage(),
+      },
+      initialRoute: OnBoardingPages.id,
     );
   }
 }
