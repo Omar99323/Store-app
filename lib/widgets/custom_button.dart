@@ -5,11 +5,11 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.onpress,
-    required this.text,
+    required this.buttonchild,
   });
 
   final void Function() onpress;
-  final String text;
+  final Widget buttonchild;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,7 @@ class CustomButton extends StatelessWidget {
           minWidth: double.infinity,
           height: MediaQuery.of(context).size.height / 13,
           onPressed: onpress,
-          child: Text(
-            text,
-            style: TextStyle(
-              fontSize: 20,
-              color: white,
-            ),
-          ),
+          child:buttonchild ,
         ),
       ),
     );

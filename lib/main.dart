@@ -1,3 +1,4 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:store_app/helpers/consts.dart';
@@ -6,8 +7,11 @@ import 'package:store_app/pages/login.dart';
 import 'package:store_app/pages/onboarding_pages.dart';
 import 'package:store_app/pages/register.dart';
 
+import 'helpers/observer.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver() ;
   runApp(const ShopApp());
 }
 

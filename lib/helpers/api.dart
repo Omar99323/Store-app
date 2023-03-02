@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
+  String baseUrl = '' ;
   Future<dynamic> get({required String url, @required String? token}) async {
     Map<String, String> headers = {};
     headers.addAll({
@@ -31,11 +32,11 @@ class Api {
     headers.addAll({'Content-Type': 'application/json'});
 
     if (token != null) {
-      headers.addAll({'Authorization': 'Bearer $token'});
+      headers.addAll({'Authorization': token});
     }
 
     http.Response response =
-        await http.post(Uri.parse(url), body: body, headers: headers);
+        await http.post(Uri.parse('https://student.valuxapps.com/api/$url'), body: jsonEncode(body), headers: headers);
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       return data;
