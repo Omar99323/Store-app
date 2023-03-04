@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/cubits/login_cubit/login_cubit.dart';
 import 'package:store_app/cubits/login_cubit/login_state.dart';
 import 'package:store_app/helpers/consts.dart';
-import 'package:store_app/helpers/show_toast.dart';
+import 'package:store_app/helpers/show_snackbar.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register.dart';
 import 'package:store_app/widgets/custom_button.dart';
@@ -23,13 +23,22 @@ class LogInPage extends StatelessWidget {
       child: BlocConsumer<LogInCubit, LogInStates>(
         listener: (context, state) {
           if (state is LogInSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(snackmessage(
+              state.succesMsg,
+              Colors.green,
+            ));
             Navigator.pushNamed(context, HomePage.id);
           } else if (state is LogInErrorState) {
-            toastmessage(state.error, Colors.red);
+            // toastmessage(state.error, Colors.red);
+            ScaffoldMessenger.of(context).showSnackBar(snackmessage(
+              state.error,
+              Colors.red,
+            ));
           }
         },
         builder: (context, state) {
           var cbt = BlocProvider.of<LogInCubit>(context);
+
           return Scaffold(
             appBar: AppBar(),
             body: Center(

@@ -26,7 +26,7 @@ class LogInCubit extends Cubit<LogInStates> {
     ).then((value) {
       LoginResponseModel loginData = LoginResponseModel.fromjson(value);
       if (loginData.status == true) {
-        emit(LogInSuccessState());
+        emit(LogInSuccessState(loginData.message));
       } else {
         emit(LogInErrorState(loginData.message));
       }
