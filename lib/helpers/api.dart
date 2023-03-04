@@ -1,42 +1,27 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  String baseUrl = '' ;
-  Future<dynamic> get({required String url, @required String? token}) async {
+  Future<Map<String, dynamic>> get({
+    required String url,
+    String? token,
+    String lang = 'ar',
+  }) async {
     Map<String, String> headers = {};
     headers.addAll({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
+      'lang': lang,
     });
     if (token != null) {
       headers.addAll({
-        'Authorization': 'Bearer $token',
+        'Authorization': token,
       });
     }
-    http.Response response = await http.get(Uri.parse(url), headers: headers);
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception(
-          'There is a issue with the status code ${response.statusCode}');
-    }
-  }
-
-  Future<dynamic> post(
-      {required String url,
-      @required dynamic body,
-      @required String? token}) async {
-        
-    Map<String, String> headers = {};
-    headers.addAll({'Content-Type': 'application/json'});
-
-    if (token != null) {
-      headers.addAll({'Authorization': token});
-    }
-
-    http.Response response =
-        await http.post(Uri.parse('https://student.valuxapps.com/api/$url'), body: jsonEncode(body), headers: headers);
+    http.Response response = await http.get(
+      Uri.parse('https://student.valuxapps.com/api/$url'),
+      headers: headers,
+    );
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       return data;
@@ -46,23 +31,58 @@ class Api {
     }
   }
 
-  Future<dynamic> put(
-      {required String url,
-      @required dynamic body,
-      @required String? token}) async {
+  Future<Map<String, dynamic>> post({
+    required String url,
+    required dynamic body,
+    String? token,
+    String lang = 'ar',
+  }) async {
     Map<String, String> headers = {};
     headers.addAll({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
+      'lang': lang,
+    });
+
+    if (token != null) {
+      headers.addAll({
+        'Authorization': token,
+      });
+    }
+
+    http.Response response = await http.post(
+      Uri.parse('https://student.valuxapps.com/api/$url'),
+      body: jsonEncode(body),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      return data;
+    } else {
+      throw Exception(
+          'There is a issue with the status code ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> put({
+    required String url,
+    required dynamic body,
+    String? token,
+    String lang = 'ar',
+  }) async {
+    Map<String, String> headers = {};
+    headers.addAll({
+      'Content-Type': 'application/json',
+      'lang': lang,
     });
     if (token != null) {
       headers.addAll({
-        'Authorization': 'Bearer $token',
+        'Authorization': token,
       });
     }
 
     http.Response response = await http.put(
-      Uri.parse(url),
-      body: body,
+      Uri.parse('https://student.valuxapps.com/api/$url'),
+      body: jsonEncode(body),
       headers: headers,
     );
 

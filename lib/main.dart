@@ -6,7 +6,6 @@ import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/login.dart';
 import 'package:store_app/pages/onboarding_pages.dart';
 import 'package:store_app/pages/register.dart';
-
 import 'helpers/observer.dart';
 
 void main() {

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/cubits/login_cubit/login_cubit.dart';
 import 'package:store_app/cubits/login_cubit/login_state.dart';
 import 'package:store_app/helpers/consts.dart';
+import 'package:store_app/helpers/show_toast.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register.dart';
 import 'package:store_app/widgets/custom_button.dart';
@@ -20,7 +21,13 @@ class LogInPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => LogInCubit(),
       child: BlocConsumer<LogInCubit, LogInStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LogInSuccessState) {
+            Navigator.pushNamed(context, HomePage.id);
+          } else if (state is LogInErrorState) {
+            toastmessage(state.error, Colors.red);
+          }
+        },
         builder: (context, state) {
           var cbt = BlocProvider.of<LogInCubit>(context);
           return Scaffold(
@@ -96,9 +103,6 @@ class LogInPage extends StatelessWidget {
                                 email: emailcontrol.text,
                                 password: passwordcontrol.text,
                               );
-                            }
-                            if (state is LogInSuccessState) {
-                              Navigator.pushNamed(context, HomePage.id);
                             }
                           },
                           buttonchild: state is LogInLoadingState
