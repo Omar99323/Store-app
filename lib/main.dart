@@ -1,8 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/cubits/app_cubit/whole_app_state.dart';
 import 'package:store_app/helpers/cache_helper.dart';
@@ -17,12 +15,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
-
-  runApp(const ShopApp());
+  bool? theme = CacheHelper.getData(key: 'theme');
+  bool? firsttime = CacheHelper.getData(key: 'firsttime');
+  runApp(ShopApp(
+    theme: theme,
+    firsttime: firsttime,
+  ));
 }
 
 class ShopApp extends StatelessWidget {
-  const ShopApp({super.key});
+  const ShopApp({super.key, required this.theme, required this.firsttime});
+  final bool? theme;
+  final bool? firsttime;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,13 @@ class ShopApp extends StatelessWidget {
       ),
     );
     return BlocProvider(
-      create: (context) => WholeAppCubit(),
+      create: (context) => WholeAppCubit()
+        ..changeAppTheme(
+          shared: theme,
+        )
+        ..notFirstTime(
+          shared: firsttime,
+        ),
       child: BlocBuilder<WholeAppCubit, WholeAppStates>(
         builder: (context, state) {
           return MaterialApp(
@@ -86,7 +96,9 @@ class ShopApp extends StatelessWidget {
               RegisterPage.id: (context) => const RegisterPage(),
               HomePage.id: (context) => const HomePage(),
             },
-            initialRoute: OnBoardingPages.id,
+            initialRoute: BlocProvider.of<WholeAppCubit>(context).firsttime
+                ? OnBoardingPages.id
+                : LogInPage.id,
           );
         },
       ),

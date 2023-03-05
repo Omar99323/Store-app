@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/cubits/login_cubit/login_cubit.dart';
 import 'package:store_app/cubits/login_cubit/login_state.dart';
 import 'package:store_app/helpers/consts.dart';
@@ -38,7 +39,7 @@ class LogInPage extends StatelessWidget {
         },
         builder: (context, state) {
           var cbt = BlocProvider.of<LogInCubit>(context);
-
+          var cubet = BlocProvider.of<WholeAppCubit>(context);
           return Scaffold(
             appBar: AppBar(),
             body: Center(
@@ -81,6 +82,7 @@ class LogInPage extends StatelessWidget {
                             }
                           },
                           isPassword: false,
+                          themecolor: cubet.isdark ? white : dark,
                         ),
                         const SizedBox(
                           height: 15,
@@ -101,6 +103,7 @@ class LogInPage extends StatelessWidget {
                             }
                           },
                           isPassword: cbt.isPass,
+                          themecolor: cubet.isdark ? white : dark,
                         ),
                         const SizedBox(
                           height: 25,

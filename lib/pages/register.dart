@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/helpers/consts.dart';
 import 'package:store_app/widgets/custom_button.dart';
 import 'package:store_app/widgets/custom_form_field.dart';
@@ -10,6 +12,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // var cbt = BlocProvider.of<LogInCubit>(context);
+    var cubet = BlocProvider.of<WholeAppCubit>(context);
     // var loginFormkey = GlobalKey<FormState>();
     var emailcontrol = TextEditingController();
     var passwordcontrol = TextEditingController();
@@ -47,7 +50,7 @@ class RegisterPage extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Please enter your email address';
                     }
-                  }, isPassword: false,
+                  }, isPassword: false, themecolor: cubet.isdark?white:dark,
                 ),
                 const SizedBox(
                   height: 15,
@@ -64,7 +67,7 @@ class RegisterPage extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Please enter your password';
                     }
-                  }, isPassword: true,
+                  }, isPassword: true, themecolor: cubet.isdark?white:dark,
                 ),
                 const SizedBox(
                   height: 25,

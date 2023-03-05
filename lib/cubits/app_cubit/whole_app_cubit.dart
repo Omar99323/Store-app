@@ -1,12 +1,32 @@
 import 'package:bloc/bloc.dart';
 import 'package:store_app/cubits/app_cubit/whole_app_state.dart';
+import 'package:store_app/helpers/cache_helper.dart';
 
 class WholeAppCubit extends Cubit<WholeAppStates> {
   WholeAppCubit() : super(WholeAppInitial());
 
   bool isdark = false;
-  changeAppTheme() {
-    isdark = !isdark;
-    emit(WholeAppModeChange());
+  bool firsttime = true;
+
+  changeAppTheme({bool? shared}) {
+    if (shared != null) {
+      isdark = shared;
+      emit(WholeAppModeChange());
+    } else {
+      isdark = !isdark;
+      CacheHelper.putData(key: 'theme', value: isdark)
+          .then((value) => emit(WholeAppModeChange()));
+    }
+  }
+
+  notFirstTime({bool? shared}) {
+    if (shared != null) {
+      isdark = shared;
+      emit(WholeAppModeChange());
+    } else {
+      firsttime = false;
+      CacheHelper.putData(key: 'firsttime', value: firsttime)
+          .then((value) => emit(WholeAppModeChange()));
+    }
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/helpers/consts.dart';
 import 'package:store_app/models/onboard_model.dart';
 import 'package:store_app/pages/login.dart';
@@ -18,17 +20,17 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
   PageController control = PageController();
   List<OnBoardModel> onboardlist = [
     OnBoardModel(
-      image: 'assets/images/shop_kachier.jpg',
+      image: 'assets/images/shop_kachier.png',
       title: 'Service speed, efficiency',
       body: 'Don\'t worry about queues or any lose of your orders.',
     ),
     OnBoardModel(
-      image: 'assets/images/husband_wife_shop.jpg',
+      image: 'assets/images/husband_wife_shop.png',
       title: 'Family Needs',
       body: 'Search for your family needs you will find it.',
     ),
     OnBoardModel(
-      image: 'assets/images/shop_confuse.jpg',
+      image: 'assets/images/shop_confuse.png',
       title: 'Don\'t Be Confused',
       body: 'You will find everything you want from a to z.',
     ),
@@ -43,6 +45,7 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                   context, LogInPage.id, (route) => false);
+              BlocProvider.of<WholeAppCubit>(context).notFirstTime();
             },
             child: const Text(
               'SKIP',
@@ -104,6 +107,7 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
                         LogInPage.id,
                         (route) => false,
                       );
+                      BlocProvider.of<WholeAppCubit>(context).notFirstTime();
                     } else {
                       control.nextPage(
                         duration: const Duration(seconds: 1),
