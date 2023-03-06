@@ -14,18 +14,18 @@ class WholeAppCubit extends Cubit<WholeAppStates> {
       emit(WholeAppModeChange());
     } else {
       isdark = !isdark;
-      CacheHelper.putData(key: 'theme', value: isdark)
+      CacheHelper.setData(key: 'theme', value: isdark)
           .then((value) => emit(WholeAppModeChange()));
     }
   }
 
   notFirstTime({bool? shared}) {
     if (shared != null) {
-      isdark = shared;
+      firsttime = shared;
       emit(WholeAppModeChange());
     } else {
       firsttime = false;
-      CacheHelper.putData(key: 'firsttime', value: firsttime)
+      CacheHelper.setData(key: 'firsttime', value: firsttime)
           .then((value) => emit(WholeAppModeChange()));
     }
   }

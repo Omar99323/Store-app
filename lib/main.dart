@@ -15,12 +15,19 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
-  bool? theme = CacheHelper.getData(key: 'theme');
-  bool? firsttime = CacheHelper.getData(key: 'firsttime');
-  runApp(ShopApp(
-    theme: theme,
-    firsttime: firsttime,
-  ));
+  bool? theme = CacheHelper.getBool(
+    key: 'theme',
+  );
+  bool? firsttime = CacheHelper.getBool(
+    key: 'firsttime',
+  );
+
+  runApp(
+    ShopApp(
+      theme: theme,
+      firsttime: firsttime,
+    ),
+  );
 }
 
 class ShopApp extends StatelessWidget {
@@ -45,6 +52,7 @@ class ShopApp extends StatelessWidget {
         ),
       child: BlocBuilder<WholeAppCubit, WholeAppStates>(
         builder: (context, state) {
+          
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             themeMode: BlocProvider.of<WholeAppCubit>(context).isdark

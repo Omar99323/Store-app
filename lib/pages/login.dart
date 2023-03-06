@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/cubits/login_cubit/login_cubit.dart';
 import 'package:store_app/cubits/login_cubit/login_state.dart';
-import 'package:store_app/helpers/consts.dart';
-import 'package:store_app/helpers/show_snackbar.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register.dart';
-import 'package:store_app/widgets/custom_button.dart';
 import 'package:store_app/widgets/custom_form_field.dart';
+import 'package:store_app/widgets/custom_button.dart';
+import 'package:store_app/helpers/show_snackbar.dart';
+import 'package:store_app/helpers/consts.dart';
 
 class LogInPage extends StatelessWidget {
   const LogInPage({super.key});
@@ -30,7 +30,6 @@ class LogInPage extends StatelessWidget {
             ));
             Navigator.pushNamed(context, HomePage.id);
           } else if (state is LogInErrorState) {
-            // toastmessage(state.error, Colors.red);
             ScaffoldMessenger.of(context).showSnackBar(snackmessage(
               state.error,
               Colors.red,
@@ -38,8 +37,8 @@ class LogInPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          var cbt = BlocProvider.of<LogInCubit>(context);
-          var cubet = BlocProvider.of<WholeAppCubit>(context);
+          var loginCbt = BlocProvider.of<LogInCubit>(context);
+          var appCubet = BlocProvider.of<WholeAppCubit>(context);
           return Scaffold(
             appBar: AppBar(),
             body: Center(
@@ -82,7 +81,7 @@ class LogInPage extends StatelessWidget {
                             }
                           },
                           isPassword: false,
-                          themecolor: cubet.isdark ? white : dark,
+                          themecolor: appCubet.isdark ? white : dark,
                         ),
                         const SizedBox(
                           height: 15,
@@ -90,9 +89,9 @@ class LogInPage extends StatelessWidget {
                         CustomFormField(
                           controler: passwordcontrol,
                           starticon: Icons.lock,
-                          endicon: cbt.visablity,
+                          endicon: loginCbt.visablity,
                           endIconOnPressed: () {
-                            cbt.changePasswordVisability();
+                            loginCbt.changePasswordVisability();
                           },
                           label: 'Password',
                           type: TextInputType.visiblePassword,
@@ -102,8 +101,8 @@ class LogInPage extends StatelessWidget {
                               return 'Please enter your password';
                             }
                           },
-                          isPassword: cbt.isPass,
-                          themecolor: cubet.isdark ? white : dark,
+                          isPassword: loginCbt.isPass,
+                          themecolor: appCubet.isdark ? white : dark,
                         ),
                         const SizedBox(
                           height: 25,
@@ -111,7 +110,7 @@ class LogInPage extends StatelessWidget {
                         CustomButton(
                           onpress: () {
                             if (loginFormkey.currentState!.validate()) {
-                              cbt.userLogin(
+                              loginCbt.userLogin(
                                 email: emailcontrol.text,
                                 password: passwordcontrol.text,
                               );

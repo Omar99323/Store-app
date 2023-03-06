@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cbt = BlocProvider.of<WholeAppCubit>(context);
+    var appCbt = BlocProvider.of<WholeAppCubit>(context);
     return BlocBuilder<WholeAppCubit, WholeAppStates>(
       builder: (context, state) {
         return Scaffold(
@@ -20,12 +20,12 @@ class HomePage extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  cbt.changeAppTheme();
-                  CacheHelper.putData(key: 'theme', value: cbt.isdark);
+                  appCbt.changeAppTheme();
+                  CacheHelper.setData(key: 'theme', value: appCbt.isdark);
                 },
                 icon: Icon(
                   Icons.brightness_4_outlined,
-                  color: cbt.isdark ? white : dark,
+                  color: appCbt.isdark ? white : dark,
                 ),
               ),
             ],
