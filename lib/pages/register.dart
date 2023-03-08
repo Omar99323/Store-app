@@ -18,6 +18,8 @@ class RegisterPage extends StatelessWidget {
     var registerFormkey = GlobalKey<FormState>();
     var emailcontrol = TextEditingController();
     var passwordcontrol = TextEditingController();
+    var namecontrol = TextEditingController();
+    var phonecontrol = TextEditingController();
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterStates>(
@@ -39,7 +41,9 @@ class RegisterPage extends StatelessWidget {
           var appCubet = BlocProvider.of<WholeAppCubit>(context);
           var registerCbt = BlocProvider.of<RegisterCubit>(context);
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+            ),
             body: Center(
               child: SingleChildScrollView(
                 child: Padding(
@@ -67,6 +71,23 @@ class RegisterPage extends StatelessWidget {
                         ),
                         const SizedBox(
                           height: 25,
+                        ),
+                        CustomFormField(
+                          controler: namecontrol,
+                          starticon: Icons.account_box_rounded,
+                          label: 'Name',
+                          type: TextInputType.name,
+                          // ignore: body_might_complete_normally_nullable
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your name';
+                            }
+                          },
+                          isPassword: false,
+                          themecolor: appCubet.isdark ? white : dark,
+                        ),
+                        const SizedBox(
+                          height: 15,
                         ),
                         CustomFormField(
                           controler: emailcontrol,
@@ -104,16 +125,33 @@ class RegisterPage extends StatelessWidget {
                           themecolor: appCubet.isdark ? white : dark,
                         ),
                         const SizedBox(
+                          height: 15,
+                        ),
+                        CustomFormField(
+                          controler: phonecontrol,
+                          starticon: Icons.phone_android,
+                          label: 'Phone Number',
+                          type: TextInputType.phone,
+                          // ignore: body_might_complete_normally_nullable
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your phone number';
+                            }
+                          },
+                          isPassword: false,
+                          themecolor: appCubet.isdark ? white : dark,
+                        ),
+                        const SizedBox(
                           height: 25,
                         ),
                         CustomButton(
                           onpress: () {
                             if (registerFormkey.currentState!.validate()) {
                               registerCbt.userRegister(
+                                name: namecontrol.text,
                                 email: emailcontrol.text,
                                 password: passwordcontrol.text,
-                                name: 'oar2',
-                                phone: '01010101010564846846',
+                                phone: phonecontrol.text,
                               );
                             }
                           },

@@ -22,11 +22,11 @@ class WholeAppCubit extends Cubit<WholeAppStates> {
   notFirstTime({bool? shared}) {
     if (shared != null) {
       firsttime = shared;
-      emit(WholeAppModeChange());
+      emit(WholeAppFirstScreenChange());
     } else {
       firsttime = false;
       CacheHelper.setData(key: 'firsttime', value: firsttime)
-          .then((value) => emit(WholeAppModeChange()));
+          .then((value) => emit(WholeAppFirstScreenChange()));
     }
   }
 }

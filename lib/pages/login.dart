@@ -28,7 +28,11 @@ class LogInPage extends StatelessWidget {
               state.succesMsg,
               Colors.green,
             ));
-            Navigator.pushNamed(context, HomePage.id);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              HomePage.id,
+              (route) => false,
+            );
           } else if (state is LogInErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(snackmessage(
               state.error,

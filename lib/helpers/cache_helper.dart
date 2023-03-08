@@ -23,10 +23,10 @@ class CacheHelper {
     }
   }
 
-  static bool? getBool({
+  static dynamic getData({
     required String key,
   }) {
-    return prefs!.getBool(key);
+    return prefs!.get(key);
   }
 
   static Future<bool> deleteData({

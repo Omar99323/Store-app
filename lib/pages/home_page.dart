@@ -4,6 +4,7 @@ import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/cubits/app_cubit/whole_app_state.dart';
 import 'package:store_app/helpers/cache_helper.dart';
 import 'package:store_app/helpers/consts.dart';
+import 'package:store_app/pages/login.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +17,6 @@ class HomePage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            automaticallyImplyLeading: false,
             actions: [
               IconButton(
                 onPressed: () {
@@ -28,6 +28,18 @@ class HomePage extends StatelessWidget {
                   color: appCbt.isdark ? white : dark,
                 ),
               ),
+              TextButton(
+                  onPressed: () {
+                    CacheHelper.deleteData(key: 'token').then(
+                      (value) {
+                        if (value) {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, LogInPage.id, (route) => false);
+                        }
+                      },
+                    );
+                  },
+                  child: const Text('LOGOUT'))
             ],
           ),
           body: Container(),

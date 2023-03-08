@@ -43,9 +43,9 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
         actions: [
           TextButton(
             onPressed: () {
+              BlocProvider.of<WholeAppCubit>(context).notFirstTime();
               Navigator.pushNamedAndRemoveUntil(
                   context, LogInPage.id, (route) => false);
-              BlocProvider.of<WholeAppCubit>(context).notFirstTime();
             },
             child: const Text(
               'SKIP',
@@ -102,12 +102,9 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
                 FloatingActionButton(
                   onPressed: () {
                     if (lastpage) {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        LogInPage.id,
-                        (route) => false,
-                      );
                       BlocProvider.of<WholeAppCubit>(context).notFirstTime();
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, LogInPage.id, (route) => false);
                     } else {
                       control.nextPage(
                         duration: const Duration(seconds: 1),

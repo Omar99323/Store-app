@@ -1,7 +1,7 @@
 class LoginResponseModel {
   final bool status;
   final String message;
-  final dynamic data;
+  final LoginUserModel? data;
 
   LoginResponseModel({
     required this.status,
