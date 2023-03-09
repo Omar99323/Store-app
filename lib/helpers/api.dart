@@ -11,11 +11,11 @@ class Api {
     Map<String, String> headers = {};
     headers.addAll({
       'Content-Type': 'application/json',
-      'lang': lang,
+      'lang':lang,
     });
     if (token != null) {
       headers.addAll({
-        'Authorization': token,
+        'Authorization':token,
       });
     }
     http.Response response = await http.get(

@@ -8,17 +8,42 @@ ThemeData darkThemeData() {
       headlineMedium: TextStyle(
         color: maincolor,
       ),
-      bodyLarge: const TextStyle(
-        color: Colors.white,
+      headlineSmall: TextStyle(
+        color: white,
+      ),
+      bodyLarge: TextStyle(
+        color: white,
       ),
     ),
     scaffoldBackgroundColor: dark,
     appBarTheme: AppBarTheme(
       elevation: 0,
       backgroundColor: dark,
+      titleTextStyle: TextStyle(
+        color: white,
+      ),
+      iconTheme: IconThemeData(
+        color: white,
+      ),
     ),
     fontFamily: 'Poppins',
     primarySwatch: maincolor,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      backgroundColor: dark,
+      selectedIconTheme: IconThemeData(
+        color: maincolor,
+      ),
+      unselectedIconTheme: const IconThemeData(
+        color: Colors.grey,
+      ),
+      selectedLabelStyle: TextStyle(
+        color: maincolor,
+      ),
+      unselectedItemColor: white,
+    ),
   );
 }
 
@@ -28,6 +53,9 @@ ThemeData lightThemeData() {
       headlineMedium: TextStyle(
         color: maincolor,
       ),
+      headlineSmall: TextStyle(
+        color: dark,
+      ),
       bodyLarge: const TextStyle(
         color: Colors.black,
       ),
@@ -36,8 +64,30 @@ ThemeData lightThemeData() {
     appBarTheme: AppBarTheme(
       elevation: 0,
       backgroundColor: white,
+      titleTextStyle: TextStyle(
+        color: dark,
+      ),
+      iconTheme: IconThemeData(
+        color: dark,
+      ),
     ),
     fontFamily: 'Poppins',
     primarySwatch: maincolor,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      backgroundColor: white,
+      selectedIconTheme: IconThemeData(
+        color: maincolor,
+      ),
+      unselectedIconTheme: const IconThemeData(
+        color: Colors.grey,
+      ),
+      selectedLabelStyle: TextStyle(
+        color: maincolor,
+      ),
+      unselectedItemColor: dark,
+    ),
   );
 }

@@ -7,7 +7,7 @@ import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register.dart';
 import 'package:store_app/widgets/custom_form_field.dart';
 import 'package:store_app/widgets/custom_button.dart';
-import 'package:store_app/helpers/show_snackbar.dart';
+import 'package:store_app/helpers/help_methods/show_snackbar.dart';
 import 'package:store_app/helpers/consts.dart';
 
 class LogInPage extends StatelessWidget {

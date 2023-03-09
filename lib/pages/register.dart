@@ -6,7 +6,7 @@ import 'package:store_app/cubits/register_cubit/register_state.dart';
 import 'package:store_app/pages/login.dart';
 import 'package:store_app/widgets/custom_form_field.dart';
 import 'package:store_app/widgets/custom_button.dart';
-import '../helpers/show_snackbar.dart';
+import '../helpers/help_methods/show_snackbar.dart';
 import 'package:store_app/helpers/consts.dart';
 
 class RegisterPage extends StatelessWidget {
