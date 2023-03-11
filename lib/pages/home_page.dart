@@ -4,6 +4,7 @@ import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/cubits/app_cubit/whole_app_state.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_cubit.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_state.dart';
+import 'package:store_app/helpers/help_methods/logout.dart';
 import 'package:store_app/pages/search_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,6 +33,12 @@ class HomePage extends StatelessWidget {
                       Navigator.pushNamed(context, SearchPage.id);
                     },
                     icon: const Icon(Icons.search),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      logOut(context);
+                    },
+                    icon: const Icon(Icons.logout_outlined),
                   ),
                 ],
                 title: Text(

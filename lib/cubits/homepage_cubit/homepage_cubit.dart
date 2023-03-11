@@ -36,10 +36,8 @@ class HomepageCubit extends Cubit<HomepageStates> {
     )
         .then((value) {
       homeResponseModel = HomeModel.fromjson(value);
-      print(homeResponseModel.status);
-      emit(HomepageSuccess());
+      emit(HomepageSuccess(homeModel: homeResponseModel));
     }).catchError((error) {
-      print(error.toString());
       emit(HomepageError(error: error.toString()));
     });
   }
