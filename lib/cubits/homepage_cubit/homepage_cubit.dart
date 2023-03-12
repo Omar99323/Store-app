@@ -12,8 +12,10 @@ import 'homepage_state.dart';
 class HomepageCubit extends Cubit<HomepageStates> {
   HomepageCubit() : super(HomepageInitial());
 
+  HomeModel? homeResponseModel;
   int currentindex = 0;
-
+  Color favColor = Colors.grey;
+  bool favPress = false;
   List<Widget> screens = [
     const ProductsPage(),
     const CategoriesPage(),
@@ -21,13 +23,23 @@ class HomepageCubit extends Cubit<HomepageStates> {
     const SettingsPage(),
   ];
 
+  void changeFavColor() {
+    if (favPress == true) {
+      favColor = Colors.red;
+      favPress = false;
+    } else {
+      favColor = Colors.grey;
+      favPress = true;
+    }
+    emit(FavColorChangeState());
+  }
+
   void getCurrentIndex(int index) {
     currentindex = index;
     emit(HomepageNavBarState());
   }
 
   void getProducts() async {
-    HomeModel homeResponseModel;
     emit(HomepageLoading());
     await Api()
         .get(
@@ -36,7 +48,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
     )
         .then((value) {
       homeResponseModel = HomeModel.fromjson(value);
-      emit(HomepageSuccess(homeModel: homeResponseModel));
+      emit(HomepageSuccess());
     }).catchError((error) {
       emit(HomepageError(error: error.toString()));
     });

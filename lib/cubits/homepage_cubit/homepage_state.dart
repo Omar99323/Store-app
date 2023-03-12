@@ -6,11 +6,7 @@ class HomepageInitial extends HomepageStates {}
 
 class HomepageLoading extends HomepageStates {}
 
-class HomepageSuccess extends HomepageStates {
-  final HomeModel homeModel;
-
-  HomepageSuccess({required this.homeModel});
-}
+class HomepageSuccess extends HomepageStates {}
 
 class HomepageError extends HomepageStates {
   final String error;
@@ -19,3 +15,5 @@ class HomepageError extends HomepageStates {
 }
 
 class HomepageNavBarState extends HomepageStates {}
+
+class FavColorChangeState extends HomepageStates {}

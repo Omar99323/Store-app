@@ -6,7 +6,7 @@ class Api {
   Future<Map<String, dynamic>> get({
     required String url,
     String? token,
-    String lang = 'ar',
+    String lang = 'en',
   }) async {
     Map<String, String> headers = {};
     headers.addAll({
@@ -35,7 +35,7 @@ class Api {
     required String url,
     required dynamic body,
     String? token,
-    String lang = 'ar',
+    String lang = 'en',
   }) async {
     Map<String, String> headers = {};
     headers.addAll({
@@ -67,7 +67,7 @@ class Api {
     required String url,
     required dynamic body,
     String? token,
-    String lang = 'ar',
+    String lang = 'en',
   }) async {
     Map<String, String> headers = {};
     headers.addAll({

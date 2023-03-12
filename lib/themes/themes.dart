@@ -14,6 +14,12 @@ ThemeData darkThemeData() {
       bodyLarge: TextStyle(
         color: white,
       ),
+      bodyMedium: TextStyle(
+        color: white,
+      ),
+      bodySmall: const TextStyle(
+        color: Colors.black,
+      ),
     ),
     scaffoldBackgroundColor: dark,
     appBarTheme: AppBarTheme(
@@ -58,6 +64,12 @@ ThemeData lightThemeData() {
       ),
       bodyLarge: const TextStyle(
         color: Colors.black,
+      ),
+      bodyMedium: const TextStyle(
+        color: Colors.black,
+      ),
+      bodySmall: const TextStyle(
+        color: Colors.white,
       ),
     ),
     scaffoldBackgroundColor: white,

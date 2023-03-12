@@ -9,8 +9,7 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomepageCubit, HomepageStates>(
-      listener: (context, state) {},
+    return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
         return state is HomepageLoading
             ? const Center(
@@ -22,23 +21,12 @@ class ProductsPage extends StatelessWidget {
                       state.error,
                     ),
                   )
-                : state is HomepageSuccess
-                    ? HomeLayout(
-                        model: state.homeModel.data,
-                      )
-                    : const Center(
-                        child: Text(
-                          'Something went wrong',
-                        ),
-                      );
+                : HomeLayout(
+                    model: BlocProvider.of<HomepageCubit>(context)
+                        .homeResponseModel!
+                        .data,
+                  );
       },
     );
   }
 }
-
-
-
-
-
-
-
