@@ -16,8 +16,8 @@ import 'helpers/observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
   String startWidget;
+  Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
   bool? theme = CacheHelper.getData(key: 'theme');
   bool? firsttime = CacheHelper.getData(key: 'firsttime');

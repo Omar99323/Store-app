@@ -14,8 +14,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
 
   HomeModel? homeResponseModel;
   int currentindex = 0;
-  Color favColor = Colors.grey;
-  bool favPress = false;
+ 
   List<Widget> screens = [
     const ProductsPage(),
     const CategoriesPage(),
@@ -23,16 +22,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
     const SettingsPage(),
   ];
 
-  void changeFavColor() {
-    if (favPress == true) {
-      favColor = Colors.red;
-      favPress = false;
-    } else {
-      favColor = Colors.grey;
-      favPress = true;
-    }
-    emit(FavColorChangeState());
-  }
+  
 
   void getCurrentIndex(int index) {
     currentindex = index;

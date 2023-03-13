@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app/cubits/homepage_cubit/homepage_cubit.dart';
 import 'package:store_app/models/home_model.dart';
 import 'package:store_app/widgets/banners_slider.dart';
 import 'package:store_app/widgets/product_builder.dart';
@@ -30,9 +28,7 @@ class HomeLayout extends StatelessWidget {
             ),
             itemCount: model.products.length,
             itemBuilder: (context, index) => ProductBuilder(
-              model: model.products[index], iconPress: () { 
-                BlocProvider.of<HomepageCubit>(context).changeFavColor();
-               },
+              model: model.products[index],
             ),
           )
         ],

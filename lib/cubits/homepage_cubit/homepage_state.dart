@@ -1,5 +1,3 @@
-import 'package:store_app/models/home_model.dart';
-
 abstract class HomepageStates {}
 
 class HomepageInitial extends HomepageStates {}

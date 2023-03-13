@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:like_button/like_button.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_cubit.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_state.dart';
 import 'package:store_app/helpers/consts.dart';
 import 'package:store_app/models/home_model.dart';
 
 class ProductBuilder extends StatelessWidget {
-  const ProductBuilder({super.key, required this.model, required this.iconPress});
+  const ProductBuilder({
+    super.key,
+    required this.model,
+  });
   final ProductModel model;
-  final void Function() iconPress;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
-        var cbt = BlocProvider.of<HomepageCubit>(context);
         return Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
@@ -71,12 +73,15 @@ class ProductBuilder extends StatelessWidget {
                       ),
                     ),
                   const Spacer(),
-                  IconButton(
-                      onPressed: iconPress,
-                      icon: Icon(
-                        Icons.favorite,
-                        color: cbt.favColor,
-                      )),
+                  LikeButton(
+                    size: 35,
+                    likeBuilder: (isLiked) {
+                      return Icon(
+                        Icons.thumb_up_alt_rounded,
+                        color: isLiked ? maincolor : Colors.grey,
+                      );
+                    },
+                  ),
                 ],
               ),
             ],
