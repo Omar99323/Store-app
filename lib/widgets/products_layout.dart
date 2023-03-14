@@ -24,13 +24,12 @@ class ProductsLayout extends StatelessWidget {
               crossAxisSpacing: 1,
               mainAxisSpacing: 1,
               childAspectRatio: 1 / 1.5,
-              // mainAxisSpacing: 70,
             ),
             itemCount: model.products.length,
             itemBuilder: (context, index) => ProductBuilder(
               model: model.products[index],
             ),
-          )
+          ),
         ],
       ),
     );

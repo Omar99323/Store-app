@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/helpers/api.dart';
 import 'package:store_app/helpers/consts.dart';
+import 'package:store_app/models/categories_model.dart';
 import 'package:store_app/models/home_model.dart';
 import 'package:store_app/pages/nav_pagess/categories_page.dart';
 import 'package:store_app/pages/nav_pagess/favorites_page.dart';
@@ -13,8 +14,9 @@ class HomepageCubit extends Cubit<HomepageStates> {
   HomepageCubit() : super(HomepageInitial());
 
   HomeModel? homeResponseModel;
+  CategoriesResponseModel? categoriesResponseModel;
   int currentindex = 0;
- 
+
   List<Widget> screens = [
     const ProductsPage(),
     const CategoriesPage(),
@@ -27,9 +29,9 @@ class HomepageCubit extends Cubit<HomepageStates> {
     emit(HomepageNavBarState());
   }
 
-  void getProducts() async {
+  void getProducts() {
     emit(HomepageLoading());
-    await Api()
+    Api()
         .get(
       url: 'home',
       token: token,
@@ -39,6 +41,20 @@ class HomepageCubit extends Cubit<HomepageStates> {
       emit(HomepageSuccess());
     }).catchError((error) {
       emit(HomepageError(error: error.toString()));
+    });
+  }
+
+  void getCategories() {
+    Api()
+        .get(
+      url: 'categories',
+      token: token,
+    )
+        .then((value) {
+      categoriesResponseModel = CategoriesResponseModel.fromjson(value);
+      emit(GetCategoriesSuccess());
+    }).catchError((error) {
+      emit(GetCategoriesError(error: error.toString()));
     });
   }
 }

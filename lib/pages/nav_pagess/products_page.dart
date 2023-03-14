@@ -11,11 +11,7 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
-        return BlocProvider.of<HomepageCubit>(context).homeResponseModel == null
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : state is HomepageError
+        return  state is HomepageError
                 ? Center(
                     child: Text(
                       state.error,
