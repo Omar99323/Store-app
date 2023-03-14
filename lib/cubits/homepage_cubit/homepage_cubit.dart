@@ -22,8 +22,6 @@ class HomepageCubit extends Cubit<HomepageStates> {
     const SettingsPage(),
   ];
 
-  
-
   void getCurrentIndex(int index) {
     currentindex = index;
     emit(HomepageNavBarState());

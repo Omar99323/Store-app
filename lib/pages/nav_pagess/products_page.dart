@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_cubit.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_state.dart';
-import 'package:store_app/widgets/home_layout.dart';
+import 'package:store_app/widgets/products_layout.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -11,7 +11,7 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
-        return state is HomepageLoading
+        return BlocProvider.of<HomepageCubit>(context).homeResponseModel == null
             ? const Center(
                 child: CircularProgressIndicator(),
               )
@@ -21,7 +21,7 @@ class ProductsPage extends StatelessWidget {
                       state.error,
                     ),
                   )
-                : HomeLayout(
+                : ProductsLayout(
                     model: BlocProvider.of<HomepageCubit>(context)
                         .homeResponseModel!
                         .data,

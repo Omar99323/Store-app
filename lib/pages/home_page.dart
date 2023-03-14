@@ -24,21 +24,30 @@ class HomePage extends StatelessWidget {
                 actions: [
                   IconButton(
                     onPressed: () {
+                      Navigator.pushNamed(context, SearchPage.id);
+                    },
+                    icon: const Icon(Icons.search),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  IconButton(
+                    onPressed: () {
                       appCbt.changeAppTheme();
                     },
                     icon: const Icon(Icons.brightness_2_outlined),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, SearchPage.id);
-                    },
-                    icon: const Icon(Icons.search),
+                  const SizedBox(
+                    width: 10,
                   ),
                   IconButton(
                     onPressed: () {
                       logOut(context);
                     },
                     icon: const Icon(Icons.logout_outlined),
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                 ],
                 title: Text(

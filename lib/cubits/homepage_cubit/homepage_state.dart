@@ -2,6 +2,8 @@ abstract class HomepageStates {}
 
 class HomepageInitial extends HomepageStates {}
 
+class HomepageNavBarState extends HomepageStates {}
+
 class HomepageLoading extends HomepageStates {}
 
 class HomepageSuccess extends HomepageStates {}
@@ -11,7 +13,10 @@ class HomepageError extends HomepageStates {
 
   HomepageError({required this.error});
 }
+class GetCategoriesSuccess extends HomepageStates {}
 
-class HomepageNavBarState extends HomepageStates {}
+class GetCategoriesError extends HomepageStates {
+  final String error;
 
-class FavColorChangeState extends HomepageStates {}
+  GetCategoriesError({required this.error});
+}

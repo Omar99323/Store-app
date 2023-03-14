@@ -24,20 +24,24 @@ class LogInPage extends StatelessWidget {
       child: BlocConsumer<LogInCubit, LogInStates>(
         listener: (context, state) {
           if (state is LogInSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(snackmessage(
-              state.succesMsg,
-              Colors.green,
-            ));
+            ScaffoldMessenger.of(context).showSnackBar(
+              snackmessage(
+                state.succesMsg,
+                Colors.green,
+              ),
+            );
             Navigator.pushNamedAndRemoveUntil(
               context,
               HomePage.id,
               (route) => false,
             );
           } else if (state is LogInErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(snackmessage(
-              state.error,
-              Colors.red,
-            ));
+            ScaffoldMessenger.of(context).showSnackBar(
+              snackmessage(
+                state.error,
+                Colors.red,
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -46,115 +50,119 @@ class LogInPage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(),
             body: Center(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Form(
-                    key: loginFormkey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'LOGIN',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(
-                                fontWeight: FontWeight.bold,
+              child: state is LogInLoadingState
+                  ? CircularProgressIndicator(
+                      color: maincolor,
+                    )
+                  : SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Form(
+                          key: loginFormkey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'LOGIN',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
-                        ),
-                        Text(
-                          'Login now to browse our hot offers',
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: Colors.grey,
-                                  ),
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        CustomFormField(
-                          controler: emailcontrol,
-                          starticon: Icons.email_outlined,
-                          label: 'Email Address',
-                          type: TextInputType.emailAddress,
-                          // ignore: body_might_complete_normally_nullable
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your email address';
-                            }
-                          },
-                          isPassword: false,
-                          themecolor: appCubet.isdark ? white : dark,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        CustomFormField(
-                          controler: passwordcontrol,
-                          starticon: Icons.lock,
-                          endicon: loginCbt.visablity,
-                          endIconOnPressed: () {
-                            loginCbt.changePasswordVisability();
-                          },
-                          label: 'Password',
-                          type: TextInputType.visiblePassword,
-                          // ignore: body_might_complete_normally_nullable
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your password';
-                            }
-                          },
-                          isPassword: loginCbt.isPass,
-                          themecolor: appCubet.isdark ? white : dark,
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        CustomButton(
-                          onpress: () {
-                            if (loginFormkey.currentState!.validate()) {
-                              loginCbt.userLogin(
-                                email: emailcontrol.text,
-                                password: passwordcontrol.text,
-                              );
-                            }
-                          },
-                          buttonchild: state is LogInLoadingState
-                              ? CircularProgressIndicator(
-                                  color: white,
-                                )
-                              : Text(
+                              Text(
+                                'Login now to browse our hot offers',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      color: Colors.grey,
+                                    ),
+                              ),
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              CustomFormField(
+                                controler: emailcontrol,
+                                starticon: Icons.email_outlined,
+                                label: 'Email Address',
+                                type: TextInputType.emailAddress,
+                                // ignore: body_might_complete_normally_nullable
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your email address';
+                                  }
+                                },
+                                isPassword: false,
+                                themecolor: appCubet.isdark ? white : dark,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              CustomFormField(
+                                controler: passwordcontrol,
+                                starticon: Icons.lock,
+                                endicon: loginCbt.visablity,
+                                endIconOnPressed: () {
+                                  loginCbt.changePasswordVisability();
+                                },
+                                label: 'Password',
+                                type: TextInputType.visiblePassword,
+                                // ignore: body_might_complete_normally_nullable
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                },
+                                isPassword: loginCbt.isPass,
+                                themecolor: appCubet.isdark ? white : dark,
+                              ),
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              CustomButton(
+                                onpress: () {
+                                  if (loginFormkey.currentState!.validate()) {
+                                    loginCbt.userLogin(
+                                      email: emailcontrol.text,
+                                      password: passwordcontrol.text,
+                                    );
+                                  }
+                                },
+                                buttonchild: Text(
                                   'LOGIN',
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: white,
                                   ),
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Don\'t have an account ?',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, RegisterPage.id);
+                                    },
+                                    child: const Text('REGISTER'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Don\'t have an account ?',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, RegisterPage.id);
-                              },
-                              child: const Text('REGISTER'),
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
             ),
           );
         },
