@@ -76,13 +76,13 @@ class ProductBuilder extends StatelessWidget {
                     likeBuilder: (isLiked) {
                       return CircleAvatar(
                         backgroundColor: BlocProvider.of<HomepageCubit>(context)
-                                .favorites[model.id]!
+                                .allProductsFavorites[model.id]!
                             ? maincolor
                             : Colors.grey,
                         child: Icon(
                           Icons.thumb_up_alt_rounded,
                           color: BlocProvider.of<HomepageCubit>(context)
-                                  .favorites[model.id]!
+                                  .allProductsFavorites[model.id]!
                               ? white
                               : dark,
                         ),

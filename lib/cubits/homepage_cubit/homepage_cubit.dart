@@ -17,7 +17,8 @@ class HomepageCubit extends Cubit<HomepageStates> {
   HomeModel? homeResponseModel;
   CategoriesResponseModel? categoriesResponseModel;
   int currentindex = 0;
-  Map<int, bool> favorites = {};
+  Map<int, bool> allProductsFavorites = {};
+  List<ProductModel> favoriteProducts = [];
 
   List<Widget> screens = [
     const ProductsPage(),
@@ -41,9 +42,14 @@ class HomepageCubit extends Cubit<HomepageStates> {
         .then((value) {
       homeResponseModel = HomeModel.fromjson(value);
       for (var element in homeResponseModel!.data.products) {
-        favorites.addAll({
+        allProductsFavorites.addAll({
           element.id: element.infavorites,
         });
+      }
+      for (var element in homeResponseModel!.data.products) {
+        if (element.infavorites == true) {
+          favoriteProducts.add(element);
+        }
       }
       emit(HomepageSuccess());
     }).catchError((error) {
@@ -65,24 +71,27 @@ class HomepageCubit extends Cubit<HomepageStates> {
     });
   }
 
-  void addOrDeleteFavorite(int id,context) {
-    favorites[id] = !favorites[id]!;
-    Api().post(
+  void addOrDeleteFavorite(int id, context) {
+    allProductsFavorites[id] = !allProductsFavorites[id]!;
+    Api()
+        .post(
       url: 'favorites',
       body: {
         'product_id': id,
       },
       token: token,
-    ).then((value) {
+    )
+        .then((value) {
       if (!value['status']) {
-        favorites[id] = !favorites[id]!;
-        ScaffoldMessenger.of(context).showSnackBar(snackmessage(value['message'], Colors.red));
+        allProductsFavorites[id] = !allProductsFavorites[id]!;
+        ScaffoldMessenger.of(context)
+            .showSnackBar(snackmessage(value['message'], Colors.red));
         emit(EditFavoritesError(error: value['message']));
       } else {
         emit(EditFavoritesSuccess());
       }
     }).catchError((error) {
-      favorites[id] = !favorites[id]!;
+      allProductsFavorites[id] = !allProductsFavorites[id]!;
       emit(EditFavoritesError(error: error.toString()));
     });
   }
