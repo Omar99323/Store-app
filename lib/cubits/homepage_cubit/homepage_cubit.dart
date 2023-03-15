@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/helpers/api.dart';
 import 'package:store_app/helpers/consts.dart';
+import 'package:store_app/helpers/help_methods/show_snackbar.dart';
 import 'package:store_app/models/categories_model.dart';
 import 'package:store_app/models/home_model.dart';
 import 'package:store_app/pages/nav_pagess/categories_page.dart';
@@ -16,6 +17,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
   HomeModel? homeResponseModel;
   CategoriesResponseModel? categoriesResponseModel;
   int currentindex = 0;
+  Map<int, bool> favorites = {};
 
   List<Widget> screens = [
     const ProductsPage(),
@@ -38,6 +40,11 @@ class HomepageCubit extends Cubit<HomepageStates> {
     )
         .then((value) {
       homeResponseModel = HomeModel.fromjson(value);
+      for (var element in homeResponseModel!.data.products) {
+        favorites.addAll({
+          element.id: element.infavorites,
+        });
+      }
       emit(HomepageSuccess());
     }).catchError((error) {
       emit(HomepageError(error: error.toString()));
@@ -55,6 +62,28 @@ class HomepageCubit extends Cubit<HomepageStates> {
       emit(GetCategoriesSuccess());
     }).catchError((error) {
       emit(GetCategoriesError(error: error.toString()));
+    });
+  }
+
+  void addOrDeleteFavorite(int id,context) {
+    favorites[id] = !favorites[id]!;
+    Api().post(
+      url: 'favorites',
+      body: {
+        'product_id': id,
+      },
+      token: token,
+    ).then((value) {
+      if (!value['status']) {
+        favorites[id] = !favorites[id]!;
+        ScaffoldMessenger.of(context).showSnackBar(snackmessage(value['message'], Colors.red));
+        emit(EditFavoritesError(error: value['message']));
+      } else {
+        emit(EditFavoritesSuccess());
+      }
+    }).catchError((error) {
+      favorites[id] = !favorites[id]!;
+      emit(EditFavoritesError(error: error.toString()));
     });
   }
 }

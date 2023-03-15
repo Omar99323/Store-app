@@ -28,9 +28,7 @@ class ProductBuilder extends StatelessWidget {
                   SizedBox(
                     height: 200,
                     width: double.infinity,
-                    child: Image.network(
-                      model.image,
-                    ),
+                    child: Image.network(model.image),
                   ),
                   if (model.discount != 0)
                     Container(
@@ -57,7 +55,7 @@ class ProductBuilder extends StatelessWidget {
                     '${model.price.toString()}' r'$',
                     style: TextStyle(
                       color: maincolor,
-                      fontSize: 12,
+                      fontSize: 18,
                     ),
                   ),
                   const SizedBox(
@@ -74,12 +72,26 @@ class ProductBuilder extends StatelessWidget {
                     ),
                   const Spacer(),
                   LikeButton(
-                    size: 35,
+                    size: 30,
                     likeBuilder: (isLiked) {
-                      return Icon(
-                        Icons.thumb_up_alt_rounded,
-                        color: isLiked ? maincolor : Colors.grey,
+                      return CircleAvatar(
+                        backgroundColor: BlocProvider.of<HomepageCubit>(context)
+                                .favorites[model.id]!
+                            ? maincolor
+                            : Colors.grey,
+                        child: Icon(
+                          Icons.thumb_up_alt_rounded,
+                          color: BlocProvider.of<HomepageCubit>(context)
+                                  .favorites[model.id]!
+                              ? white
+                              : dark,
+                        ),
                       );
+                    },
+                    onTap: (isLiked) async {
+                      BlocProvider.of<HomepageCubit>(context)
+                          .addOrDeleteFavorite(model.id, context);
+                      return !isLiked;
                     },
                   ),
                 ],

@@ -13,9 +13,8 @@ class HomeModel {
 }
 
 class HomeDataModel {
-  final List<BannerModel> banners=[];
-  final List<ProductModel> products=[];
-
+  final List<BannerModel> banners = [];
+  final List<ProductModel> products = [];
 
   HomeDataModel.fromjson(Map<String, dynamic> json) {
     json['banners'].forEach((element) {
@@ -48,14 +47,14 @@ class ProductModel {
   final dynamic discount;
   final String name;
   final String image;
-  final bool infavorites;
-  final bool incart;
+  bool infavorites = false;
+  bool incart = false;
 
   ProductModel({
     required this.id,
     required this.price,
     required this.oldprice,
-    this.discount,
+    required this.discount,
     required this.name,
     required this.image,
     required this.infavorites,

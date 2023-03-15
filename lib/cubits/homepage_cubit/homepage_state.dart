@@ -13,10 +13,19 @@ class HomepageError extends HomepageStates {
 
   HomepageError({required this.error});
 }
+
 class GetCategoriesSuccess extends HomepageStates {}
 
 class GetCategoriesError extends HomepageStates {
   final String error;
 
   GetCategoriesError({required this.error});
+}
+
+class EditFavoritesSuccess extends HomepageStates {}
+
+class EditFavoritesError extends HomepageStates {
+  final String error;
+
+  EditFavoritesError({required this.error});
 }

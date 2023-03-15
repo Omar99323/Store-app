@@ -14,7 +14,7 @@ class ProductsLayout extends StatelessWidget {
       child: Column(
         children: [
           BannersSlider(
-            model: model,
+            model: model ,
           ),
           GridView.builder(
             shrinkWrap: true,

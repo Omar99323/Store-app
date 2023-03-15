@@ -29,4 +29,5 @@ class WholeAppCubit extends Cubit<WholeAppStates> {
           .then((value) => emit(WholeAppFirstScreenChange()));
     }
   }
+  
 }
