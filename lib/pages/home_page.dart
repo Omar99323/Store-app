@@ -4,7 +4,6 @@ import 'package:store_app/cubits/app_cubit/whole_app_cubit.dart';
 import 'package:store_app/cubits/app_cubit/whole_app_state.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_cubit.dart';
 import 'package:store_app/cubits/homepage_cubit/homepage_state.dart';
-import 'package:store_app/helpers/help_methods/logout.dart';
 import 'package:store_app/pages/search_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -40,15 +39,6 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  IconButton(
-                    onPressed: () {
-                      logOut(context);
-                    },
-                    icon: const Icon(Icons.logout_outlined),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
                 ],
                 title: Text(
                   'Salla',
@@ -56,8 +46,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               body:
-                  BlocProvider.of<HomepageCubit>(context)
-                  .homeResponseModel ==
+                  BlocProvider.of<HomepageCubit>(context).homeResponseModel ==
                               null ||
                           BlocProvider.of<HomepageCubit>(context)
                                   .categoriesResponseModel ==

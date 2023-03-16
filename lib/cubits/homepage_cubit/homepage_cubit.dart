@@ -6,6 +6,7 @@ import 'package:store_app/helpers/help_methods/show_snackbar.dart';
 import 'package:store_app/models/categories_model.dart';
 import 'package:store_app/models/favorite_model.dart';
 import 'package:store_app/models/home_model.dart';
+import 'package:store_app/models/login_model.dart';
 import 'package:store_app/pages/nav_pagess/categories_page.dart';
 import 'package:store_app/pages/nav_pagess/favorites_page.dart';
 import 'package:store_app/pages/nav_pagess/products_page.dart';
@@ -16,6 +17,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
   HomepageCubit() : super(HomepageInitial());
 
   HomeModel? homeResponseModel;
+  LoginResponseModel? profilemodel ;
   CategoriesResponseModel? categoriesResponseModel;
   FavoritesResponseModel? favoritesResponseModel;
   int currentindex = 0;
@@ -115,6 +117,20 @@ class HomepageCubit extends Cubit<HomepageStates> {
       emit(GetFavoritesSuccess());
     }).catchError((error) {
       emit(GetFavoritesError(error: error.toString()));
+    });
+  }
+  
+  void getProfile() {
+    Api()
+        .get(
+      url: 'profile',
+      token: token,
+    )
+        .then((value) {
+      profilemodel = LoginResponseModel.fromjson(value);
+      emit(GetProfileSuccess());
+    }).catchError((error) {
+      emit(GetProfileError(error: error.toString()));
     });
   }
 }

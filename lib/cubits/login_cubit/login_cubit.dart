@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:store_app/cubits/login_cubit/login_state.dart';
 import 'package:store_app/helpers/api.dart';
 import 'package:store_app/helpers/cache_helper.dart';
+import 'package:store_app/helpers/consts.dart';
 import 'package:store_app/models/login_model.dart';
 
 class LogInCubit extends Cubit<LogInStates> {
@@ -29,6 +30,7 @@ class LogInCubit extends Cubit<LogInStates> {
       if (loginData.status == true) {
         CacheHelper.setData(key: 'token', value: loginData.data!.token)
             .then((value) {
+          token = loginData.data!.token;
           emit(LogInSuccessState(loginData.message));
         });
       } else {

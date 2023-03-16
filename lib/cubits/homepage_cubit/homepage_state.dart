@@ -39,3 +39,11 @@ class GetFavoritesError extends HomepageStates {
 
   GetFavoritesError({required this.error});
 }
+
+class GetProfileSuccess extends HomepageStates {}
+
+class GetProfileError extends HomepageStates {
+  final String error;
+
+  GetProfileError({required this.error});
+}
