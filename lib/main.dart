@@ -63,7 +63,8 @@ class ShopApp extends StatelessWidget {
         BlocProvider(
           create: (context) => HomepageCubit()
             ..getProducts()
-            ..getCategories(),
+            ..getCategories()
+            ..getFavorites(),
         ),
       ],
       child: BlocBuilder<WholeAppCubit, WholeAppStates>(

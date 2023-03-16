@@ -4,6 +4,7 @@ import 'package:store_app/helpers/api.dart';
 import 'package:store_app/helpers/consts.dart';
 import 'package:store_app/helpers/help_methods/show_snackbar.dart';
 import 'package:store_app/models/categories_model.dart';
+import 'package:store_app/models/favorite_model.dart';
 import 'package:store_app/models/home_model.dart';
 import 'package:store_app/pages/nav_pagess/categories_page.dart';
 import 'package:store_app/pages/nav_pagess/favorites_page.dart';
@@ -16,9 +17,10 @@ class HomepageCubit extends Cubit<HomepageStates> {
 
   HomeModel? homeResponseModel;
   CategoriesResponseModel? categoriesResponseModel;
+  FavoritesResponseModel? favoritesResponseModel;
   int currentindex = 0;
   Map<int, bool> allProductsFavorites = {};
-  List<ProductModel> favoriteProducts = [];
+  List<FavoriteModel> favoriteProducts = [];
 
   List<Widget> screens = [
     const ProductsPage(),
@@ -46,11 +48,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
           element.id: element.infavorites,
         });
       }
-      for (var element in homeResponseModel!.data.products) {
-        if (element.infavorites == true) {
-          favoriteProducts.add(element);
-        }
-      }
+
       emit(HomepageSuccess());
     }).catchError((error) {
       emit(HomepageError(error: error.toString()));
@@ -84,15 +82,39 @@ class HomepageCubit extends Cubit<HomepageStates> {
         .then((value) {
       if (!value['status']) {
         allProductsFavorites[id] = !allProductsFavorites[id]!;
-        ScaffoldMessenger.of(context)
-            .showSnackBar(snackmessage(value['message'], Colors.red));
+        ScaffoldMessenger.of(context).showSnackBar(
+          snackmessage(
+            value['message'],
+            Colors.red,
+          ),
+        );
         emit(EditFavoritesError(error: value['message']));
       } else {
         emit(EditFavoritesSuccess());
+        getFavorites();
       }
     }).catchError((error) {
       allProductsFavorites[id] = !allProductsFavorites[id]!;
       emit(EditFavoritesError(error: error.toString()));
+    });
+  }
+
+  void getFavorites() {
+    emit(GetFavoritesLoading());
+    favoriteProducts.clear();
+    Api()
+        .get(
+      url: 'favorites',
+      token: token,
+    )
+        .then((value) {
+      favoritesResponseModel = FavoritesResponseModel.fromjson(value);
+      for (var element in favoritesResponseModel!.data.favorites) {
+        favoriteProducts.add(element);
+      }
+      emit(GetFavoritesSuccess());
+    }).catchError((error) {
+      emit(GetFavoritesError(error: error.toString()));
     });
   }
 }

@@ -66,7 +66,7 @@ class ProductBuilder extends StatelessWidget {
                       '${model.oldprice.toString()}' r'$',
                       style: const TextStyle(
                         color: Colors.grey,
-                        fontSize: 12,
+                        fontSize: 15,
                         decoration: TextDecoration.lineThrough,
                       ),
                     ),

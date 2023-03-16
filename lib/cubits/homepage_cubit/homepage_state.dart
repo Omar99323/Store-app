@@ -29,3 +29,13 @@ class EditFavoritesError extends HomepageStates {
 
   EditFavoritesError({required this.error});
 }
+
+class GetFavoritesLoading extends HomepageStates {}
+
+class GetFavoritesSuccess extends HomepageStates {}
+
+class GetFavoritesError extends HomepageStates {
+  final String error;
+
+  GetFavoritesError({required this.error});
+}

@@ -55,15 +55,20 @@ class HomePage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-              body: BlocProvider.of<HomepageCubit>(context).homeResponseModel ==
-                          null ||
-                      BlocProvider.of<HomepageCubit>(context)
-                              .categoriesResponseModel ==
-                          null
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : hpCbt.screens[hpCbt.currentindex],
+              body:
+                  BlocProvider.of<HomepageCubit>(context)
+                  .homeResponseModel ==
+                              null ||
+                          BlocProvider.of<HomepageCubit>(context)
+                                  .categoriesResponseModel ==
+                              null ||
+                          BlocProvider.of<HomepageCubit>(context)
+                                  .favoritesResponseModel ==
+                              null
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : hpCbt.screens[hpCbt.currentindex],
               bottomNavigationBar: BottomNavigationBar(
                 iconSize: 30,
                 currentIndex: hpCbt.currentindex,
