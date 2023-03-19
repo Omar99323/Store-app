@@ -9,10 +9,10 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var catmodel =
+        BlocProvider.of<HomepageCubit>(context).categoriesResponseModel;
     return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
-        var catmodel =
-            BlocProvider.of<HomepageCubit>(context).categoriesResponseModel;
         return state is HomepageError
             ? Center(
                 child: Text(

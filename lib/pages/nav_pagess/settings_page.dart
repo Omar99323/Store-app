@@ -19,7 +19,17 @@ class SettingsPage extends StatelessWidget {
     var namecontrol = TextEditingController();
     var emailcontrol = TextEditingController();
     var phonecontrol = TextEditingController();
-
+    var appCubet = BlocProvider.of<WholeAppCubit>(context);
+    var hpcbt = BlocProvider.of<HomepageCubit>(context);
+    namecontrol.text = hpcbt.updateProfilemodel == null
+        ? hpcbt.profilemodel!.data!.name
+        : hpcbt.updateProfilemodel!.data!.name;
+    emailcontrol.text = hpcbt.updateProfilemodel == null
+        ? hpcbt.profilemodel!.data!.email
+        : hpcbt.updateProfilemodel!.data!.email;
+    phonecontrol.text = hpcbt.updateProfilemodel == null
+        ? hpcbt.profilemodel!.data!.phone
+        : hpcbt.updateProfilemodel!.data!.phone;
     return BlocBuilder<WholeAppCubit, WholeAppStates>(
       builder: (context, state) {
         return BlocConsumer<HomepageCubit, HomepageStates>(
@@ -41,8 +51,6 @@ class SettingsPage extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            var appCubet = BlocProvider.of<WholeAppCubit>(context);
-            var hpcbt = BlocProvider.of<HomepageCubit>(context);
             return Center(
               child: SingleChildScrollView(
                 child: Padding(
@@ -59,7 +67,6 @@ class SettingsPage extends StatelessWidget {
                         ),
                         CustomFormField(
                           controler: namecontrol,
-                          value: hpcbt.profilemodel!.data!.name,
                           starticon: Icons.account_box_rounded,
                           label: 'Name',
                           type: TextInputType.name,
@@ -77,7 +84,6 @@ class SettingsPage extends StatelessWidget {
                         ),
                         CustomFormField(
                           controler: emailcontrol,
-                          value: hpcbt.profilemodel!.data!.email,
                           starticon: Icons.email_outlined,
                           label: 'Email Address',
                           type: TextInputType.emailAddress,
@@ -95,7 +101,6 @@ class SettingsPage extends StatelessWidget {
                         ),
                         CustomFormField(
                           controler: phonecontrol,
-                          value: hpcbt.profilemodel!.data!.phone,
                           starticon: Icons.phone_android,
                           label: 'Phone Number',
                           type: TextInputType.phone,
@@ -119,6 +124,7 @@ class SettingsPage extends StatelessWidget {
                                 email: emailcontrol.text,
                                 phone: phonecontrol.text,
                               );
+                              hpcbt.getProfile();
                             }
                           },
                           buttonchild: appCubet.isdark

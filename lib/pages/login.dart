@@ -19,6 +19,8 @@ class LogInPage extends StatelessWidget {
     var loginFormkey = GlobalKey<FormState>();
     var emailcontrol = TextEditingController();
     var passwordcontrol = TextEditingController();
+    var loginCbt = BlocProvider.of<LogInCubit>(context);
+    var appCubet = BlocProvider.of<WholeAppCubit>(context);
     return BlocProvider(
       create: (context) => LogInCubit(),
       child: BlocConsumer<LogInCubit, LogInStates>(
@@ -45,8 +47,6 @@ class LogInPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          var loginCbt = BlocProvider.of<LogInCubit>(context);
-          var appCubet = BlocProvider.of<WholeAppCubit>(context);
           return Scaffold(
             appBar: AppBar(),
             body: Center(

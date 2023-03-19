@@ -12,11 +12,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var hpCbt = BlocProvider.of<HomepageCubit>(context);
     return BlocBuilder<WholeAppCubit, WholeAppStates>(
       builder: (context, state) {
         return BlocBuilder<HomepageCubit, HomepageStates>(
           builder: (context, state) {
-            var hpCbt = BlocProvider.of<HomepageCubit>(context);
             return Scaffold(
               appBar: AppBar(
                 actions: [

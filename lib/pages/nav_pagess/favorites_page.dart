@@ -9,9 +9,9 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var favcbt = BlocProvider.of<HomepageCubit>(context);
     return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
-        var favcbt = BlocProvider.of<HomepageCubit>(context);
         return state is GetFavoritesLoading
             ? const Center(
                 child: CircularProgressIndicator(),
@@ -35,4 +35,3 @@ class FavoritesPage extends StatelessWidget {
     );
   }
 }
-
