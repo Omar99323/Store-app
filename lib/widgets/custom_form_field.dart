@@ -14,6 +14,7 @@ class CustomFormField extends StatelessWidget {
     this.endIconOnPressed,
     required this.isPassword,
     required this.themecolor,
+    this.onchange,
   });
 
   final TextEditingController controler;
@@ -25,6 +26,7 @@ class CustomFormField extends StatelessWidget {
   final Color themecolor;
   final String? Function(String?)? validator;
   final void Function(String)? onsubmit;
+  final void Function(String)? onchange;
   final void Function()? ontap;
   final void Function()? endIconOnPressed;
 
@@ -38,6 +40,7 @@ class CustomFormField extends StatelessWidget {
       obscureText: isPassword,
       onTap: ontap,
       onFieldSubmitted: onsubmit,
+      onChanged: onchange,
       style: TextStyle(color: themecolor),
       decoration: InputDecoration(
         border: const OutlineInputBorder(),

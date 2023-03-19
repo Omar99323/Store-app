@@ -62,3 +62,13 @@ class UpdateProfileError extends HomepageStates {
 
   UpdateProfileError({required this.error});
 }
+
+class SearchLoading extends HomepageStates {}
+
+class SearchSuccess extends HomepageStates {}
+
+class SearchError extends HomepageStates {
+  final String error;
+
+  SearchError({required this.error});
+}

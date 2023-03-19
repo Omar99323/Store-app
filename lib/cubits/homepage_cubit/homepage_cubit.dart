@@ -7,6 +7,7 @@ import 'package:store_app/models/categories_model.dart';
 import 'package:store_app/models/favorite_model.dart';
 import 'package:store_app/models/home_model.dart';
 import 'package:store_app/models/login_model.dart';
+import 'package:store_app/models/search_model.dart';
 import 'package:store_app/pages/nav_pagess/categories_page.dart';
 import 'package:store_app/pages/nav_pagess/favorites_page.dart';
 import 'package:store_app/pages/nav_pagess/products_page.dart';
@@ -21,9 +22,11 @@ class HomepageCubit extends Cubit<HomepageStates> {
   LoginResponseModel? updateProfilemodel;
   CategoriesResponseModel? categoriesResponseModel;
   FavoritesResponseModel? favoritesResponseModel;
+  SearchResponseModel? searchResponseModel;
   int currentindex = 0;
   Map<int, bool> allProductsFavorites = {};
   List<FavoriteModel> favoriteProducts = [];
+  List<SearchProductModel> searchProducts = [];
 
   List<Widget> screens = [
     const ProductsPage(),
@@ -154,6 +157,26 @@ class HomepageCubit extends Cubit<HomepageStates> {
       emit(UpdateProfileSuccess(updateProfilemodel!));
     }).catchError((error) {
       emit(UpdateProfileError(error: error.toString()));
+    });
+  }
+
+  void searchproducts({required String searchText}) {
+    emit(SearchLoading());
+    searchProducts.clear();
+    Api()
+        .post(
+      url: 'products/search',
+      body: {'text': searchText},
+      token: token,
+    )
+        .then((value) {
+      searchResponseModel = SearchResponseModel.fromjson(value);
+      for (var element in searchResponseModel!.data.searchProducts) {
+        searchProducts.add(element);
+      }
+      emit(SearchSuccess());
+    }).catchError((error) {
+      emit(SearchError(error: error.toString()));
     });
   }
 }
