@@ -22,7 +22,7 @@ void main() async {
   bool? theme = CacheHelper.getData(key: 'theme');
   bool? firsttime = CacheHelper.getData(key: 'firsttime');
   token = CacheHelper.getData(key: 'token');
-  print(token);
+
   if (firsttime != null) {
     if (token != null) {
       startWidget = HomePage.id;

@@ -36,7 +36,6 @@ class CustomFormField extends StatelessWidget {
       controller: controler,
       validator: validator,
       keyboardType: type,
-      obscuringCharacter: '*',
       obscureText: isPassword,
       onTap: ontap,
       onFieldSubmitted: onsubmit,

@@ -23,17 +23,6 @@ class SearchProduct extends StatelessWidget {
                 width: 120,
                 child: Image.network(model.image),
               ),
-              if (model.discount != 0)
-                Container(
-                  color: Colors.red,
-                  child: Padding(
-                    padding: const EdgeInsets.all(2),
-                    child: Text(
-                      'DISCOUNT',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                ),
             ],
           ),
           Expanded(
@@ -66,15 +55,6 @@ class SearchProduct extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
-                      if (model.discount != 0)
-                        Text(
-                          '${model.oldprice.toString()}' r'$',
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                        ),
                       const Spacer(),
                       LikeButton(
                         size: 30,

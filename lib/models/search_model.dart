@@ -29,8 +29,6 @@ class SearchProductModel {
   final dynamic discount;
   final String name;
   final String image;
-  bool infavorites = false;
-  bool incart = false;
 
   SearchProductModel({
     required this.id,
@@ -39,8 +37,6 @@ class SearchProductModel {
     required this.discount,
     required this.name,
     required this.image,
-    required this.infavorites,
-    required this.incart,
   });
 
   factory SearchProductModel.fromjson(Map<String, dynamic> json) {
@@ -51,9 +47,6 @@ class SearchProductModel {
       discount: json['discount'],
       name: json['name'],
       image: json['image'],
-      infavorites: json['in_favorites'],
-      incart: json['in_cart'],
     );
   }
 }
-

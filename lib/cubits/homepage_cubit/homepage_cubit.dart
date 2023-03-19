@@ -171,6 +171,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
     )
         .then((value) {
       searchResponseModel = SearchResponseModel.fromjson(value);
+
       for (var element in searchResponseModel!.data.searchProducts) {
         searchProducts.add(element);
       }

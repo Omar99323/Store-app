@@ -5,7 +5,7 @@ import 'package:store_app/helpers/cache_helper.dart';
 class WholeAppCubit extends Cubit<WholeAppStates> {
   WholeAppCubit() : super(WholeAppInitial());
 
-  bool isdark = false;
+  bool isdark = true;
   bool firsttime = true;
 
   changeAppTheme({bool? shared}) {

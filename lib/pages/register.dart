@@ -20,8 +20,7 @@ class RegisterPage extends StatelessWidget {
     var passwordcontrol = TextEditingController();
     var namecontrol = TextEditingController();
     var phonecontrol = TextEditingController();
-    var appCubet = BlocProvider.of<WholeAppCubit>(context);
-    var registerCbt = BlocProvider.of<RegisterCubit>(context);
+
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterStates>(
@@ -40,6 +39,8 @@ class RegisterPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          var appCubet = BlocProvider.of<WholeAppCubit>(context);
+          var registerCbt = BlocProvider.of<RegisterCubit>(context);
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
