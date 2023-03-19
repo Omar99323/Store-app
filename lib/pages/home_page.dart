@@ -12,12 +12,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var hpCbt = BlocProvider.of<HomepageCubit>(context);
-    var appCbt = BlocProvider.of<WholeAppCubit>(context);
     return BlocBuilder<WholeAppCubit, WholeAppStates>(
       builder: (context, state) {
         return BlocBuilder<HomepageCubit, HomepageStates>(
           builder: (context, state) {
+            var hpCbt = BlocProvider.of<HomepageCubit>(context);
             return Scaffold(
               appBar: AppBar(
                 actions: [
@@ -26,15 +25,6 @@ class HomePage extends StatelessWidget {
                       Navigator.pushNamed(context, SearchPage.id);
                     },
                     icon: const Icon(Icons.search),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      appCbt.changeAppTheme();
-                    },
-                    icon: const Icon(Icons.brightness_2_outlined),
                   ),
                   const SizedBox(
                     width: 10,

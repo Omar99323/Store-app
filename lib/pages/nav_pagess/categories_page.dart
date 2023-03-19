@@ -11,7 +11,7 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
-        var model =
+        var catmodel =
             BlocProvider.of<HomepageCubit>(context).categoriesResponseModel;
         return state is HomepageError
             ? Center(
@@ -28,9 +28,9 @@ class CategoriesPage extends StatelessWidget {
                   mainAxisSpacing: 1,
                   childAspectRatio: 1 / 1,
                 ),
-                itemCount: model!.data.categories.length,
+                itemCount: catmodel!.data.categories.length,
                 itemBuilder: (context, index) => CategoryBuilder(
-                  model: model.data.categories[index],
+                  model: catmodel.data.categories[index],
                 ),
               );
       },

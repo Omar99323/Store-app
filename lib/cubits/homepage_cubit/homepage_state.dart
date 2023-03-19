@@ -1,3 +1,5 @@
+import 'package:store_app/models/login_model.dart';
+
 abstract class HomepageStates {}
 
 class HomepageInitial extends HomepageStates {}
@@ -46,4 +48,17 @@ class GetProfileError extends HomepageStates {
   final String error;
 
   GetProfileError({required this.error});
+}
+
+class UpdateProfileLoading extends HomepageStates {}
+
+class UpdateProfileSuccess extends HomepageStates {
+  LoginResponseModel model;
+  UpdateProfileSuccess(this.model);
+}
+
+class UpdateProfileError extends HomepageStates {
+  final String error;
+
+  UpdateProfileError({required this.error});
 }

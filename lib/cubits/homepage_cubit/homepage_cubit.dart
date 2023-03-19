@@ -17,7 +17,8 @@ class HomepageCubit extends Cubit<HomepageStates> {
   HomepageCubit() : super(HomepageInitial());
 
   HomeModel? homeResponseModel;
-  LoginResponseModel? profilemodel ;
+  LoginResponseModel? profilemodel;
+  LoginResponseModel? updateProfilemodel;
   CategoriesResponseModel? categoriesResponseModel;
   FavoritesResponseModel? favoritesResponseModel;
   int currentindex = 0;
@@ -119,7 +120,7 @@ class HomepageCubit extends Cubit<HomepageStates> {
       emit(GetFavoritesError(error: error.toString()));
     });
   }
-  
+
   void getProfile() {
     Api()
         .get(
@@ -131,6 +132,28 @@ class HomepageCubit extends Cubit<HomepageStates> {
       emit(GetProfileSuccess());
     }).catchError((error) {
       emit(GetProfileError(error: error.toString()));
+    });
+  }
+
+  void updateProfile({
+    required String name,
+    required String email,
+    required String phone,
+  }) {
+    emit(UpdateProfileLoading());
+    Api().put(
+      url: 'update-profile',
+      token: token,
+      body: {
+        'name': name,
+        'email': email,
+        'phone': phone,
+      },
+    ).then((value) {
+      updateProfilemodel = LoginResponseModel.fromjson(value);
+      emit(UpdateProfileSuccess(updateProfilemodel!));
+    }).catchError((error) {
+      emit(UpdateProfileError(error: error.toString()));
     });
   }
 }

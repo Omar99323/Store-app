@@ -11,7 +11,7 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomepageCubit, HomepageStates>(
       builder: (context, state) {
-        var cbt = BlocProvider.of<HomepageCubit>(context);
+        var favcbt = BlocProvider.of<HomepageCubit>(context);
         return state is GetFavoritesLoading
             ? const Center(
                 child: CircularProgressIndicator(),
@@ -20,10 +20,10 @@ class FavoritesPage extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: cbt.favoriteProducts.length,
+                  itemCount: favcbt.favoriteProducts.length,
                   itemBuilder: (BuildContext context, int index) {
                     return FavoriteProduct(
-                      model: cbt.favoriteProducts[index],
+                      model: favcbt.favoriteProducts[index],
                     );
                   },
                   separatorBuilder: (context, index) => const SizedBox(

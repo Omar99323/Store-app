@@ -13,10 +13,11 @@ class CustomFormField extends StatelessWidget {
       this.ontap,
       this.endIconOnPressed,
       required this.isPassword,
-      required this.themecolor});
+      required this.themecolor, this.value});
 
   final TextEditingController controler;
   final String label;
+  final String? value;
   final IconData starticon;
   final IconData? endicon;
   final bool isPassword;
@@ -30,9 +31,11 @@ class CustomFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: value,
       controller: controler,
       validator: validator,
       keyboardType: type,
+      obscuringCharacter: '*',
       obscureText: isPassword,
       onTap: ontap,
       onFieldSubmitted: onsubmit,
